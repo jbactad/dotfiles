@@ -16,6 +16,9 @@ My personal dotfiles for macos and linux distros.
 - tmux
 - vim
 
+To run tests:
+- docker
+
 Debian/Ubuntu
 ```sh
 sudo apt-get install git curl zsh tmux vim -y
@@ -39,4 +42,9 @@ brew install curl zsh git tmux vim
 Inside the local repository
 ```sh
 ./bin/install.sh
+```
+
+### Running tests
+```sh
+./bin/test.sh
 ```

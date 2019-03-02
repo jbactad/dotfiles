@@ -73,3 +73,39 @@ On_IBlue='\033[0;104m'    # Blue
 On_IPurple='\033[0;105m'  # Purple
 On_ICyan='\033[0;106m'    # Cyan
 On_IWhite='\033[0;107m'   # White
+
+execute() {
+  printf "Running ${Yellow}$1${Color_off}\n"
+  $1
+}
+
+# utils
+need_cmd () {
+    if ! command -v "$1" > /dev/null 2>&1
+    then printf "${Red}need '$1' (command not found)${Color_off}\n"
+    fi
+}
+
+# Symlinks the configs
+symlink () {
+    FILENAME=$(basename $1)
+    TARGET=$ROOT_DIR/$FILENAME
+    FILE=$HOME/.$FILENAME
+    if [ -e "$FILE" ]
+    then
+        if file $FILE | grep $ROOT_DIR &> /dev/null;then
+            printf "Installed $Red$FILE${Color_off}\n"
+        else
+            printf "Skipping $Red$FILE${Color_off}\n"
+        fi
+    else
+        printf "Linking $Cyan$FILE${Color_off} -> $Blue$TARGET${Color_off}\n"
+        ln -s "$TARGET" "$FILE"
+    fi
+}
+
+create_dir () {
+    if [ ! -d "$1" ];then
+      mkdir -p "$1"
+    fi 
+}
