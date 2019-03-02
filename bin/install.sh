@@ -1,7 +1,5 @@
 #!/bin/bash
-# Init colors
-export INSTALL_PATH="$(cd $(dirname $0)/../ ; pwd -P )"
-source $INSTALL_PATH/bin/colors.sh
+source "$(dirname $0)/common.sh"
 # utils
 need_cmd () {
     if ! command -v "$1" > /dev/null 2>&1
@@ -12,11 +10,11 @@ need_cmd () {
 # Symlinks the configs
 symlink () {
     FILENAME=$(basename $1)
-    TARGET=$INSTALL_PATH/$FILENAME
+    TARGET=$ROOT_DIR/$FILENAME
     FILE=$HOME/.$FILENAME
     if [ -e "$FILE" ]
     then
-        if file $FILE | grep $INSTALL_PATH &> /dev/null;then
+        if file $FILE | grep $ROOT_DIR &> /dev/null;then
             printf "Installed $Red$FILE${Color_off}\n"
         else
             printf "Skipping $Red$FILE${Color_off}\n"
@@ -35,12 +33,12 @@ create_dir () {
 
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
-bash $INSTALL_PATH/bin/install-go-vim.sh
+bash $ROOT_DIR/bin/install-go-vim.sh
 
 create_dir "$HOME/.config"
 create_dir "$HOME/.local/bin"
 
-symlink "${INSTALL_PATH}/tmux.conf"
-symlink "${INSTALL_PATH}/tmux.conf.local"
-symlink "${INSTALL_PATH}/vimrc"
-symlink "${INSTALL_PATH}/profile"
+symlink "${ROOT_DIR}/tmux.conf"
+symlink "${ROOT_DIR}/tmux.conf.local"
+symlink "${ROOT_DIR}/vimrc"
+symlink "${ROOT_DIR}/profile"

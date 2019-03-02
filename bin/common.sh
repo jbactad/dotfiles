@@ -1,3 +1,5 @@
+#!/bin/bash
+ROOT_DIR="$(cd $(dirname $0)/../ ; pwd -P )"
 
 # Reset
 Color_off='\033[0m'       # Text Reset

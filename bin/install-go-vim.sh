@@ -1,10 +1,10 @@
-#!/bin/sh
-source "$(cd $(dirname $0) ; pwd -P )/colors.sh"
+#!/bin/bash
+source "$(dirname $0)/common.sh"
+INSTALL_PATH="${ROOT_DIR}/go-vimrc"
 
 printf "${Cyan}Setting up vim-go.${Color_off}\n"
 
 VIM_PLUG_PATH=~/.vim/autoload/plug.vim
-INSTALL_PATH="$(cd $(dirname $0)/../go-vimrc ; pwd -P )"
 VIM_HOME="$HOME/.vim"
 VIM_GO_PATH="$HOME/.go.vimrc"
 
