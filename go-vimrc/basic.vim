@@ -135,7 +135,6 @@ set nrformats=octal,hex,alpha
 
 " Enable syntax highlighting
 syntax enable
-
 try
     colorscheme desert
 catch
@@ -246,6 +245,9 @@ map <c-space> ?
 
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
+
+" Clear hightlists when esc is pressed.
+"nnoremap <esc> :noh<return><esc>
 
 " Smart way to move between windows
 map <C-j> <C-W>j
