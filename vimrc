@@ -1,3 +1,3 @@
-set nc
+set nocompatible
 set number
 set relativenumber
