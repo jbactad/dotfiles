@@ -54,7 +54,9 @@ set wildmode=list:longest,full
 
 " Highlight current line - allows you to track cursor position more easily
 set cursorline
-
+let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
+let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
 " Completion options (select longest + show menu even if a single match is found)
 set completeopt=longest,menuone
 
@@ -66,8 +68,7 @@ else
     set wildignore+=.git\*,.hg\*,.svn\*
 endif
 
-" Show line, column number, and relative position within a file in the status line
-set ruler
+" Show line, column number, and relative position within a file in the status line set ruler
 
 " Show line numbers - could be toggled on/off on-fly by pressing F6
 set number
