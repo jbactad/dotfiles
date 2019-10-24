@@ -1,4 +1,4 @@
-call plug#begin('$HOME/.vim/vim-go-plugins')
+call plug#begin('$HOME/.config/nvim/plugged')
 
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries', 'tag': 'v1.19' }
 Plug 'uarun/vim-protobuf'

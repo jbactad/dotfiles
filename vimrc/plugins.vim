@@ -5,6 +5,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'kien/ctrlp.vim'
 Plug 'valloric/youcompleteme'
 Plug 'nightsense/cosmic_latte'
+Plug 'wakatime/vim-wakatime'
 
 call plug#end()
 
