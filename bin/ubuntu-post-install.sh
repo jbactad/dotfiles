@@ -10,8 +10,6 @@ sudo apt-get update \
         curl \
         build-essential \
         cmake \
-        python-dev \
-        python-pip \ 
         python3-dev \
         python3-pip \
         apt-transport-https \
@@ -24,26 +22,23 @@ sudo apt-get update \
         shutter \
         neofetch \
         htop \
+        docker.io \
+        neovim \
 && sudo apt-get autoremove
 
 # oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 # Themes
-sudo apt-get install numix-gtk-theme
-sudo add-apt-repository ppa:system76/pop
-sudo apt update
-sudo apt install pop-icon-theme pop-theme
+#sudo apt-get install numix-gtk-theme
+#sudo add-apt-repository ppa:system76/pop
+#sudo apt update
+#sudo apt install pop-icon-theme pop-theme
 
 # Docker and utils
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-sudo add-apt-repository \
-    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-    $(lsb_release -cs) \
-    stable"
-
-sudo apt-get install -y docker-ce docker-ce-cli containerd.io
-pip install docker-compose --user
+sudo systemctl enable --now docker
+sudo usermod -aG docker $USER
+pip3 install docker-compose --user
 
 ## Kubectl
 sudo snap install --classic kubectl
@@ -63,11 +58,6 @@ sudo install minikube /usr/local/bin/ && rm minikube
 # Editor
 ## vs-code
 sudo snap install --classic code 
-
-# neovim
-sudo add-apt-repository ppa:neovim-ppa/stable
-sudo apt-get update
-sudo apt-get install neovim
 
 # Messenger
 sudo snap install --classic slack
