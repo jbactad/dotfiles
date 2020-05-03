@@ -25,3 +25,6 @@ nmap <silent> <leader>n :silent :nohlsearch<cr>
 
 " Make sure that CTRL-A (used by gnu screen) is redefined
 noremap <leader>inc <C-A>
+
+" Automatically opens the neomake window
+let g:neomake_open_list = 2

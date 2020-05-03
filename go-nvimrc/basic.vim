@@ -68,7 +68,11 @@ else
     set wildignore+=.git\*,.hg\*,.svn\*
 endif
 
-" Show line, column number, and relative position within a file in the status line set ruler
+" Show ruler in the editor
+set colorcolumn=80,120
+
+" Show line, column number, and relative position within a file in the status line 
+set ruler
 
 " Show line numbers - could be toggled on/off on-fly by pressing F6
 set number
@@ -182,7 +186,7 @@ set noswapfile
 " /20  - remember 20 items in search history
 " %    - remember the buffer list (if vim started without a file arg)
 " n    - set name of viminfo file
-set viminfo='20,\"50,:20,/20,%,n~/.viminfo.go
+set viminfo='20,\"50,:20,/20,%,n~/.nviminfo.go
 
 " Define what to save with :mksession
 " blank - empty windows

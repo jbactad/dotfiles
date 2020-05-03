@@ -24,4 +24,3 @@ endtry
 EOF
 
 printf "${Cyan}Installation succcessful!${Color_off}\n"
-printf "${Cyan}To use run: ${Yellow}vim -u $VIM_GO_PATH${Color_off}\n"
