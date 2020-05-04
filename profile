@@ -1,3 +1,4 @@
+export EDITOR=vim
 alias dc=docker-compose
 alias vim-go="vim -u $HOME/.go.vimrc"
 if ! [ -x "$(command -v pbcopy)" ]; then
