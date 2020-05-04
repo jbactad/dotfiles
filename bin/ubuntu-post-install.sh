@@ -1,39 +1,34 @@
 sudo apt-get update \
-    && sudo apt-get upgrade \
-    && sudo apt-get install -y \
-        tmux \
-        zsh \
-        git \
-        vim \
-        gnome-tweaks \
-        chrome-gnome-shell \
-        curl \
-        build-essential \
-        cmake \
-        python3-dev \
-        python3-pip \
-        apt-transport-https \
-        ca-certificates \
-        curl \
-        gnupg-agent \
-        software-properties-common \
-        dconf-editor \
-        gparted \
-        shutter \
-        neofetch \
-        htop \
-        docker.io \
-        neovim \
+&& sudo apt-get upgrade \
+&& sudo apt-get install -y \
+    tmux \
+    zsh \
+    git \
+    vim \
+    gnome-tweaks \
+    chrome-gnome-shell \
+    curl \
+    build-essential \
+    cmake \
+    python3-dev \
+    python3-pip \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg-agent \
+    software-properties-common \
+    dconf-editor \
+    gparted \
+    neofetch \
+    htop \
+    docker.io \
+    neovim \
+    papirus-icon-theme \
+    numix-icon-theme-circle \
 && sudo apt-get autoremove
 
 # oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-# Themes
-#sudo apt-get install numix-gtk-theme
-#sudo add-apt-repository ppa:system76/pop
-#sudo apt update
-#sudo apt install pop-icon-theme pop-theme
 
 # Docker and utils
 sudo systemctl enable --now docker
@@ -64,6 +59,5 @@ sudo snap install --classic slack
 
 # Utilities
 sudo snap install pick-colour-picker
-sudo snap install mailspring
 sudo snap install postman
 
