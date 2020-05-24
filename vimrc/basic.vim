@@ -4,7 +4,6 @@
 
 " let's make sure we are in noncompatble mode
 set nocp
-
 " Sets how many lines of history VIM has to remember
 set history=700
 
@@ -24,21 +23,30 @@ vmap <Leader>w <ESC><ESC>:w<CR>
 
 " :W sudo saves the file
 " (useful for handling the permission-denied error)
-command W w !sudo tee % > /dev/null
+command! W w !sudo tee % > /dev/null
 
 " This is totally awesome - remap jj to escape in insert mode.  You'll never type jj anyway, so it's great!
 inoremap jj <esc>
 nnoremap JJJJ <nop>
+
+set shortmess+=c
+set signcolumn=yes
+set updatetime=300
 
 "------------------------------------------------------------------------------
 " VIM user interface
 "------------------------------------------------------------------------------
 
 " Make sure that coursor is always vertically centered on j/k moves
-set so=999
+" set so=999
 
-" add vertical lines on columns
-set colorcolumn=120,200
+" Always split to the right side.
+set splitright
+set splitbelow
+
+" Open terminal in split window.
+nnoremap <leader>otv :78vs +term<CR>
+nnoremap <leader>ot :15split +term<CR>
 
 " Avoid garbled characters in Chinese language windows OS
 let $LANG='en'
@@ -55,6 +63,12 @@ set wildmode=list:longest,full
 " Highlight current line - allows you to track cursor position more easily
 set cursorline
 
+set path+=**
+
+let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
+let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
+let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
+
 " Completion options (select longest + show menu even if a single match is found)
 set completeopt=longest,menuone
 
@@ -66,22 +80,26 @@ else
     set wildignore+=.git\*,.hg\*,.svn\*
 endif
 
+" Show ruler in the editor
+set colorcolumn=100
+
 " Show line, column number, and relative position within a file in the status line
 set ruler
 
 " Show line numbers - could be toggled on/off on-fly by pressing F6
 set number
 
+" Set line numbers to be relative to the line where the cursor is currently at.
 set relativenumber
 
 " Show (partial) commands (or size of selection in Visual mode) in the status line
 set showcmd
 
 " A buffer becomes hidden when it is abandoned
-set hid
+set hidden
 
 " Configure backspace so it acts as it should act
-set backspace=eol,start,indent
+" set backspace=eol,start,indent
 set whichwrap+=<,>,h,l
 
 " In many terminal emulators the mouse works just fine, thus enable it.
@@ -128,41 +146,41 @@ set foldcolumn=0
 " Enable Ctrl-A/Ctrl-X to work on octal and hex numbers, as well as characters
 set nrformats=octal,hex,alpha
 
-
 "------------------------------------------------------------------------------
 " Colors and Fonts
 "------------------------------------------------------------------------------
 
 " Enable syntax highlighting
 syntax enable
-try
-    colorscheme desert
-catch
-endtry
-
-set background=dark
 
 " Set extra options when running in GUI mode
+set t_Co=256
 if has("gui_running")
     set guioptions-=T
     set guioptions-=e
-    set t_Co=256
     set guitablabel=%M\ %t
 endif
 
 " Set utf8 as standard encoding and en_US as the standard language
 set encoding=utf8
+set spelllang=en_US
 
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
 
 " highlight trailing space
-highlight ExtraWhitespace ctermbg=red guibg=red
-match ExtraWhitespace /\s\+$/
-autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-autocmd BufWinLeave * call clearmatches()
+"highlight ExtraWhitespace ctermbg=red guibg=red
+"match ExtraWhitespace /\s\+$/
+"autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+"autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+"autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+"autocmd BufWinLeave * call clearmatches()
+
+" Set whitespace characters
+set listchars=eol:¬,tab:→\ ,trail:•,space:·,extends:»,precedes:«,nbsp:␣
+" Show whitespace characters
+" set list
+    
 
 "------------------------------------------------------------------------------
 " Files, backups and undo
@@ -181,7 +199,7 @@ set noswapfile
 " /20  - remember 20 items in search history
 " %    - remember the buffer list (if vim started without a file arg)
 " n    - set name of viminfo file
-set viminfo='20,\"50,:20,/20,%,n~/.viminfo
+" set viminfo='20,\"50,:20,/20,%,n~/.nviminfo
 
 " Define what to save with :mksession
 " blank - empty windows
@@ -192,7 +210,7 @@ set viminfo='20,\"50,:20,/20,%,n~/.viminfo
 " options - all options and mapping
 " winsize - window sizes
 " tabpages - all tab pages
-set sessionoptions=blank,buffers,curdir,folds,help,options,winsize,tabpages
+" set sessionoptions=blank,buffers,curdir,folds,help,options,winsize,tabpages
 
 
 "------------------------------------------------------------------------------
@@ -209,7 +227,7 @@ set smarttab
 set shiftwidth=4
 set tabstop=4
 
-" Round indent to multiple of 'shiftwidth' for > and < commands
+" Round indent to multiple of 'shiftwidth' for > and < command
 set shiftround
 
 " Linebreak on 500 characters
@@ -219,6 +237,8 @@ set tw=500
 set ai "Auto indent
 set si "Smart indent
 set nowrap "Don't Wrap lines (it is stupid)
+
+inoremap <S-Tab> <C-d>
 
 
 "------------------------------------------------------------------------------
@@ -246,9 +266,6 @@ map <c-space> ?
 " Disable highlight when <leader><cr> is pressed
 map <silent> <leader><cr> :noh<cr>
 
-" Clear hightlists when esc is pressed.
-"nnoremap <esc> :noh<return><esc>
-
 " Smart way to move between windows
 map <C-j> <C-W>j
 map <C-k> <C-W>k
@@ -256,21 +273,23 @@ map <C-h> <C-W>h
 map <C-l> <C-W>l
 
 " Close all the buffers
-map <leader>bda :1,1000 bd!<cr>
+map <leader>bda :CloseHiddenBuffers<cr>
 
 " Useful mappings for managing tabs
-map <leader>tn :tabnew<cr>
-map <leader>to :tabonly<cr>
-map <leader>tc :tabclose<cr>
-map <leader>tm :tabmove
-map <leader>tj :tabnext
-map <leader>tk :tabprevious
+map <leader>n :tabnew<CR>
+map <leader>to :tabonly<CR>
+map <leader>tc :tabclose<CR>
+map <leader>tm :tabmove<CR>
+map <leader>tn :tabnext<CR>
+map <leader>tp :tabprevious<CR>
+
+" Switch between the last two files
+nnoremap <leader><leader> <C-^>
 
 " Let 'tl' toggle between this and the last accessed tab
 let g:lasttab = 1
-nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
+nmap <silent> <Leader>tl :exe "tabn ".g:lasttab<CR>
 au TabLeave * let g:lasttab = tabpagenr()
-
 
 " Opens a new tab with the current buffer's path
 " Super useful when editing files in the same directory
@@ -301,7 +320,7 @@ set viminfo^=%
 " Always show the status line
 set laststatus=2
 
-" Format the status line
+" Format the status line !Disabled since lightline is enabled!
 " set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
 
 
@@ -324,19 +343,9 @@ if has("mac") || has("macunix")
   vmap <D-k> <M-k>
 endif
 
-" Delete trailing white space on save, useful for Python and CoffeeScript ;)
-func! DeleteTrailingWS()
-  exe "normal mz"
-  %s/\s\+$//ge
-  exe "normal `z"
-endfunc
-autocmd BufWrite *.go :call DeleteTrailingWS()
-autocmd BufWrite *.py :call DeleteTrailingWS()
-autocmd BufWrite *.coffee :call DeleteTrailingWS()
-
 " visual shifting (does not exit Visual mode)
-vnoremap < <gv
-vnoremap > >gv
+vnoremap < <gv <gv
+vnoremap > >gv >gv
 
 
 "------------------------------------------------------------------------------
@@ -364,10 +373,10 @@ vnoremap <silent> <leader>r :call VisualSelection('replace', '')<CR>
 " To go to the previous search results do:
 "   <leader>p
 "
-map <leader>cc :botright cope<cr>
-map <leader>co ggVGy:tabnew<cr>:set syntax=qf<cr>pgg
-map <leader>n :cn<cr>
-map <leader>p :cp<cr>
+" map <leader>cc :botright cope<cr>
+" map <leader>co ggVGy:tabnew<cr>:set syntax=qf<cr>pgg
+" map <leader>n :cn<cr>
+" map <leader>p :cp<cr>
 
 
 "------------------------------------------------------------------------------
@@ -403,6 +412,9 @@ map <leader>pp :setlocal paste!<cr>
 " easy way to edit reload .vimrc
 nmap <leader>V :source $MYVIMRC<cr>
 nmap <leader>v :vsp $MYVIMRC<cr>
+
+" CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
+inoremap <C-c> <ESC>
 
 "------------------------------------------------------------------------------
 " Helper functions
@@ -442,3 +454,20 @@ function! HasPaste()
     en
     return ''
 endfunction
+
+" Helper function to close all hidden buffers.
+command! CloseHiddenBuffers call s:CloseHiddenBuffers()
+function! s:CloseHiddenBuffers()
+  let open_buffers = []
+
+  for i in range(tabpagenr('$'))
+    call extend(open_buffers, tabpagebuflist(i + 1))
+  endfor
+
+  for num in range(1, bufnr("$") + 1)
+    if buflisted(num) && index(open_buffers, num) == -1
+      exec "bdelete ".num
+    endif
+  endfor
+endfunction
+

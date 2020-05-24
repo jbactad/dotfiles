@@ -1,0 +1,30 @@
+{
+    "coc.preferences.colorSupport": true,
+    "eslint.autoFixOnSave": true,
+    "coc.preferences.formatOnSaveFiletypes": [
+        "rust",
+        "go",
+        "javascript",
+        "javascript.jsx",
+        "typescript",
+        "typescript.tsx"
+    ],
+    "list.normalMappings": {
+        "<C-c>": "do:exit"
+    },
+    "list.insertMappings": {
+        "<C-c>": "do:exit"
+    },
+    "snippets.enableStatusItem": true,
+    "suggest.noselect": false,
+    "diagnostic.checkCurrentLine": true,
+    "rust-analyzer.lens.enable": true,
+    "rust-analyzer.serverPath": "rust-analyzer",
+    "go.goplsOptions": {
+        "usePlaceholders": true,
+        "completeUnimported": true
+    },
+    "git.addGBlameToBufferVar": true,
+    "languageserver": {
+    }
+}

@@ -1,7 +1,7 @@
 #!/bin/bash
 source "$(dirname $0)/common.sh"
 
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
 bash $ROOT_DIR/bin/install-go-nvim.sh
 bash $ROOT_DIR/bin/install-vim.sh
