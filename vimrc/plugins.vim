@@ -29,6 +29,8 @@ try
     colorscheme PaperColor
 catch
 endtry
+highlight Normal guifg=grey guibg=#282A36
+
 
 "------------------------------------------------------------------------------
 " NerdTree

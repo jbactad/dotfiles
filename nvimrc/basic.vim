@@ -38,7 +38,7 @@ set updatetime=300
 "------------------------------------------------------------------------------
 
 " Make sure that coursor is always vertically centered on j/k moves
-" set so=999
+set so=15
 
 " Always split to the right side.
 set splitright
@@ -107,6 +107,9 @@ if has('mouse')
   set mouse=a
 endif
 
+" Set tag file path.
+set tags=.git/tags;/
+
 " Allow smarter completion by infering the case
 set infercase
 
@@ -145,6 +148,12 @@ set foldcolumn=0
 
 " Enable Ctrl-A/Ctrl-X to work on octal and hex numbers, as well as characters
 set nrformats=octal,hex,alpha
+
+" Enable code folding by syntax.
+set foldmethod=syntax
+" Make by default code is unfolded.
+set foldlevelstart=99
+
 
 "------------------------------------------------------------------------------
 " Colors and Fonts
@@ -191,7 +200,17 @@ set nobackup
 set nowb
 set noswapfile
 
+" set undofile
+if !isdirectory("/tmp/.vim-undo-dir")
+    call mkdir("/tmp/.vim-undo-dir", "", 0700)
+endif
+if has("persistent_undo")
+    set undodir=/tmp/.vim-undo-dir
+    set undofile
+endif
+
 " Remember things between sessions
+" DISABLED because of vim-procession
 "
 " '20  - remember marks for 20 previous files
 " \"50 - save 50 lines for each register
@@ -199,7 +218,7 @@ set noswapfile
 " /20  - remember 20 items in search history
 " %    - remember the buffer list (if vim started without a file arg)
 " n    - set name of viminfo file
-" set viminfo='20,\"50,:20,/20,%,n~/.nviminfo
+" set shada='20,\"50,:20,/20,%,n~/.nviminfo
 
 " Define what to save with :mksession
 " blank - empty windows
@@ -210,7 +229,8 @@ set noswapfile
 " options - all options and mapping
 " winsize - window sizes
 " tabpages - all tab pages
-" set sessionoptions=blank,buffers,curdir,folds,help,options,winsize,tabpages
+set sessionoptions=blank,buffers,curdir,folds,help,options,winsize,tabpages
+
 
 
 "------------------------------------------------------------------------------
@@ -276,7 +296,7 @@ map <C-l> <C-W>l
 map <leader>bda :CloseHiddenBuffers<cr>
 
 " Useful mappings for managing tabs
-map <leader>n :tabnew<CR>
+map <leader>tnn :tabnew<CR>
 map <leader>to :tabonly<CR>
 map <leader>tc :tabclose<CR>
 map <leader>tm :tabmove<CR>
@@ -310,8 +330,6 @@ autocmd BufReadPost *
      \ if line("'\"") > 0 && line("'\"") <= line("$") |
      \   exe "normal! g`\"" |
      \ endif
-" Remember info about open buffers on close
-set viminfo^=%
 
 
 "------------------------------------------------------------------------------
@@ -319,10 +337,6 @@ set viminfo^=%
 "------------------------------------------------------------------------------
 " Always show the status line
 set laststatus=2
-
-" Format the status line !Disabled since lightline is enabled!
-" set statusline=\ %{HasPaste()}%F%m%r%h\ %w\ \ CWD:\ %r%{getcwd()}%h\ \ \ Line:\ %l
-
 
 "------------------------------------------------------------------------------
 " Editing mappings

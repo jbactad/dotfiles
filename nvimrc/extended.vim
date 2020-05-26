@@ -17,9 +17,6 @@ nnoremap <leader><leader> <C-^>
 " map CTRL-L to piece-wise copying of the line above the current one
 imap <C-L> @@@<esc>hhkywjl?@@@<CR>P/@@@<cr>3s 
 
-" turn off search highlighting (type <leader>n to de-select everything)
-nmap <silent> <leader>n :silent :nohlsearch<cr>
-
 " Make sure that CTRL-A (used by gnu screen) is redefined
 noremap <leader>inc <C-A>
 
