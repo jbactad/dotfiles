@@ -1,0 +1,213 @@
+# A valid snippet should starts with:
+#
+#		snippet trigger_word [ "description" [ options ] ]
+#
+# and end with:
+#
+#		endsnippet
+#
+# Snippet options:
+#
+#		b - Beginning of line.
+#		i - In-word expansion.
+#		w - Word boundary.
+#		r - Regular expression
+#		e - Custom context snippet
+#		A - Snippet will be triggered automatically, when condition matches.
+#
+# Basic example:
+#
+#		snippet emitter "emitter properties" b
+#		private readonly ${1} = new Emitter<$2>()
+#		public readonly ${1/^_(.*)/$1/}: Event<$2> = this.$1.event
+#		endsnippet
+#
+# Online reference: https://github.com/SirVer/ultisnips/blob/master/doc/UltiSnips.txt
+
+snippet ch "channel declaration" b
+chan ${1:type}
+endsnippet
+
+snippet in "empty interface" b
+interface{}
+endsnippet
+
+snippet forr "for range" b
+for ${2:_,} ${3:x} := range ${1:arr} {
+	${0}	
+}
+endsnippet
+
+snippet range.map "range map" b
+for ${2:k,} ${3:v} := range ${1:map} {
+	${0}
+}
+endsnippet
+
+snippet range.arr "range array, slices" b
+for ${2:i,} ${3:x} := range ${1:arr} {
+	${0}	
+}
+endsnippet
+
+snippet range.str "range interate over unicode points,not bytes" b
+for ${2:i,} ${3:x} := range ${1:str} {
+	${0}
+}
+endsnippet
+
+snippet slice.av "Slice Append Vector" b
+${1:arr} = append($1, ${2:vec})
+endsnippet
+
+snippet slice.copy "Slice Copy" b
+${1:dest} := make([]${2:int}, len(${3:src}))
+copy($1, $3)
+endsnippet
+
+snippet slice.cut "a = append(a[:i], a[j:]...)" b
+${1:arr} = append($1[:${2:i}], $1[${3:j}:]...)
+endsnippet
+
+snippet fp "fmt.Println()" b
+fmt.Println("${1}")
+endsnippet
+
+snippet ff "fmt.Printf()" b
+fmt.Printf("${1}", ${2:var})
+endsnippet
+
+snippet lp "log.Println()" b
+log.Println(${1})
+endsnippet
+
+snippet lf "log.Printf()" b
+log.Printf("${1}", ${2:var})
+endsnippet
+
+snippet lfv "log variable content" b
+log.Printf("${1:var}: %#+v\\n", ${1})
+endsnippet
+
+snippet gf "goroutine function" b
+go ${1:func}(${0})
+endsnippet
+
+snippet w "http ResponseWriter *Request" b
+${1:w} http.ResponseWriter, ${2:r} *http.Request
+endsnippet
+
+snippet hf "http.HandlerFunc" b
+${1:http}.HandleFunc("${2:/}", ${3:handler})
+endsnippet
+
+snippet hand "http handler declaration" b
+func $1(${2:w} http.ResponseWriter, ${3:r} *http.Request) {
+	$0
+}
+endsnippet
+
+snippet rd "http.Redirect" b
+http.Redirect(${1:w}, ${2:r}, "${3:/}", ${4:http.StatusFound})
+endsnippet
+
+snippet herr "http.Error" b
+http.Error(${1:w}, ${2:err}.Error(), ${3:http.StatusInternalServerError})
+endsnippet
+
+snippet las "http.ListenAndServe" b
+http.ListenAndServe("${1::8080}", ${2:nil})
+endsnippet
+
+snippet sv "http.Serve" b
+http.Serve("${1::8080}", ${2:nil})
+endsnippet
+snippet go "goroutine anonymous" b
+go (func(${1:var} ${2:int}) \{
+	${0}
+\})($1)}
+endsnippet
+
+snippet df "defer statement" b
+defer ${1:func}(${0})
+endsnippet
+
+snippet tf "test function" b
+func Test${1}(t *testing.T) {
+	${0}
+}
+endsnippet
+
+snippet bf "benchmark function" b
+func Benchmark${1}(b $testing.B) {
+	for ${2:i} := 0; $2 < b.N; $2++ {
+		${0}
+	}
+}
+endsnippet
+
+snippet ef "example function" b
+func Example${1}(){
+	${2}
+
+	// Output:
+	// $3
+}
+endsnippet
+
+snippet tdt "table driven test" b
+func Test${1}(t *testing.T) {
+	tests := []struct {
+		name string
+		${2}
+	}{
+		// TODO: Add test cases.
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			${0}
+		})
+	}
+}
+endsnippet
+
+snippet initf "init function" b
+init(){
+	${0}
+}
+endsnippet
+
+snippet sort "sort implementation" b
+type ${1:sortBy} []${2:type}
+
+func (a $1) Len() int { 
+	return len(a)
+}
+
+func (a $1) Swap(i, j int) {
+	a[i], a[j] = a[j], a[i]
+}
+
+func (a $1) Less(i, j int) bool {
+	${3:return a[i] < a[j]}
+}
+endsnippet
+
+snippet helloweb "hello world web app" b
+package main
+
+import (
+	"fmt"
+	"net/http"
+	"time"
+)
+
+func greet(w http.ResponseWriter, r *http.Request) {
+	fmt.Fprintf(w, "Hello World! %s", time.Now())
+}
+
+func main() {
+	http.HandleFunc("/", greet)
+	http.ListenAndServe(":8080", nil)
+}
+endsnippet

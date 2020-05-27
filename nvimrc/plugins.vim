@@ -1,14 +1,11 @@
-"------------------------------------------------------------------------------
-" Plugins
-"------------------------------------------------------------------------------
+j
 call plug#begin()
-
-" Navigation
+" {{{2 Navigation
 Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'majutsushi/tagbar'
-
-" Appearance
+" }}}
+" {{{2 Appearance
 Plug 'dracula/vim'
 Plug 'joshdick/onedark.vim'
 Plug 'sheerun/vim-polyglot'
@@ -16,31 +13,30 @@ Plug 'nightsense/cosmic_latte'
 Plug 'ryanoasis/vim-devicons'
 Plug 'itchyny/lightline.vim'
 Plug 'NLKNguyen/papercolor-theme'
-
-" Editor
+" }}}
+" {{{2 Editor
 Plug 'neoclide/coc.nvim', {
     \'branch': 'release',
     \'do': ':CocInstall coc-rust-analyzer coc-json coc-lists coc-snippets coc-git coc-go coc-yaml
-    \coc-tsserver coc-yank coc-db coc-highlight coc-eslint coc-pairs coc-prettier coc-vimlsp
-    \coc-actions coc-github'
+    \ coc-tsserver coc-yank coc-db coc-eslint coc-pairs coc-prettier coc-vimlsp
+    \ coc-actions coc-github'
 \}
 Plug 'honza/vim-snippets'
 Plug 'preservim/nerdcommenter'
-
-
-" Session
+"Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+" }}}
+" {{{2 Session
 Plug 'tpope/vim-obsession'
 Plug 'dhruvasagar/vim-prosession'
 Plug 'mbbill/undotree'
-
-" Misc
+" }}}
+" {{{2 Misc
 Plug 'wakatime/vim-wakatime'
-
+Plug 'puremourning/vimspector', { 'do': './install_gadget.py --enable-go'}
+" }}}
 call plug#end()
-
-"------------------------------------------------------------------------------
-" Colorscheme
-"------------------------------------------------------------------------------
+" }}}
+" {{{1 Colorscheme
 set background=dark
 let g:PaperColor_Theme_Options = {
   \  'theme': {
@@ -54,53 +50,32 @@ try
 catch
 endtry
 highlight CocHighlightText ctermbg=6 guibg=#008080
-
-"------------------------------------------------------------------------------
-" NerdTree
-"------------------------------------------------------------------------------
+" }}}
+" {{{1 NerdTree
 let NERDTreeShowHidden=1
 map <C-n> :NERDTreeToggle<CR>
 nnoremap <leader>nr :NERDTreeRefreshRoot<CR>
 nnoremap <leader>nf :NERDTreeFind<CR>
-
-
-"------------------------------------------------------------------------------
-" Tagbar
-"------------------------------------------------------------------------------
+let NERDTreeMinimalUI=1
+" }}}
+" {{{1 Tagbar
 nmap <F8> :TagbarToggle<CR>
-
-
-"------------------------------------------------------------------------------
-" coc.vim
-"------------------------------------------------------------------------------
+" }}}
+" {{{1 coc.vim
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
 
+" Use tab to expand, <C-n> next suggestion, <C-p> previous suggestion.
+"inoremap <silent><expr> <TAB>
+      "\ pumvisible() ? coc#_select_confirm() :
+      "\ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+      "\ <SID>check_back_space() ? "\<TAB>" :
+      "\ coc#refresh()
+
 " Use tab and shift-tab to navigate placeholder.
 let g:coc_snippet_next = '<TAB>'
 let g:coc_snippet_prev = '<S-TAB>'
-
-" Use <C-l> for trigger snippet expand.
-" imap <C-l> <Plug>(coc-snippets-expand)
-
-" Use <C-j> for select text for visual placeholder of snippet.
-" vmap <C-j> <Plug>(coc-snippets-select)
-
-" Use <C-j> for both expand and jump (make expand higher priority.)
-" imap <C-j> <Plug>(coc-snippets-expand-
-
-" Use tab to expand, <C-n> next suggestion, <C-p> previous suggestion.
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? coc#_select_confirm() :
-      \ coc#expandableOrJumpable() ? "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
 
 " Use <c-space> to trigger completion.
 inoremap <silent><expr> <c-space> coc#refresh()
@@ -109,7 +84,10 @@ inoremap <silent><expr> <c-space> coc#refresh()
 " position. Coc only does snippet and additional edit on confirm.
 " <CR> could be remapped by other vim plugin, try `:verbose imap <CR>`.
 if exists('*complete_info')
-  inoremap <expr> <CR> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+    inoremap <expr> <CR>
+        \ complete_info()["selected"] != "-1" ?
+        \ "\<C-y>" :
+        \ "\<C-g>u\<CR>"
 else
   inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 endif
@@ -139,17 +117,6 @@ xmap ag <Plug>(coc-git-chunk-outer)
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
-" Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
 " Symbol renaming.
 nmap <F2> <Plug>(coc-rename)
 
@@ -158,14 +125,6 @@ xmap <leader>f  <Plug>(coc-format-selected)
 nmap <leader>f  <Plug>(coc-format-selected)
 nnoremap <leader>F :Format<CR>
 xnoremap <leader>F :Format<CR>
-
-augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder.
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
 
 " Applying codeAction to the selected region.
 "xmap <leader>a  <Plug>(coc-codeaction-selected)
@@ -176,9 +135,6 @@ augroup end
 "<leader>aw for the current word
 "<leader>aas for the current sentence
 "<leader>aap for the current paragraph
-function! s:cocActionsOpenFromSelected(type) abort
-  execute 'CocCommand actions.open ' . a:type
-endfunction
 xmap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
 nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
 
@@ -214,7 +170,7 @@ command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organize
 
 " Mappings using CoCList:
 " Show all diagnostics.
-nnoremap <silent> <space>a  :<C-u>CocList diagnostics<CR>
+nnoremap <silent> <space>a  :<C-u>CocList -A diagnostics<CR>
 " Manage extensions.
 nnoremap <silent> <space>e  :<C-u>CocList extensions<CR>
 " Show commands.
@@ -238,18 +194,8 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 nnoremap <leader>ect :call ChromeDevTools(1)<CR>
 nnoremap <leader>dct :call ChromeDevTools(0)<CR>
 
-function! ChromeDevTools(enabled) abort
-    if a:enabled
-        let g:coc_node_args = ['--nolazy', '--inspect=6045']
-    else
-        let g:coc_node_args = []
-    endif
-
-    execute "CocRestart"
-endfunction
-
-"------------------------------------------------------------------------------
-" lightline
+" }}}
+" {{{1 lightline
 "------------------------------------------------------------------------------
 set noshowmode
 let g:lightline = {
@@ -262,7 +208,7 @@ let g:lightline = {
   \     [ 'modified', ],
   \   ],
   \   'right':[
-  \     [ 'lineinfo', 'percent', ],
+  \     [ 'lineinfo', 'percent', 'obsession'],
   \     [ 'filetype', 'fileencoding', 'shiftwidth', ],
   \     [ 'blame', ],
   \   ],
@@ -283,6 +229,7 @@ let g:lightline = {
   \   'shiftwidth': 'LightlineShiftwidth',
   \   'gitstatus': 'LightlineGitStatus',
   \   'diagnostics2': 'LightlineDiagnostics2',
+  \   'obsession': 'ObsessionStatus'
   \ },
   \ 'component':{
   \ },
@@ -296,8 +243,30 @@ let g:lightline = {
   \   'warnings': 'warning',
   \   'informations': 'tabsel',
   \ },
+  \ 'tabline': {
+  \   'left': [ [ 'tabs' ] ],
+  \   'right': [ [ 'relativepath', 'close' ] ],
+  \ },
 \ }
 
+autocmd User CocDiagnosticChange call lightline#update()
+autocmd User CocStatusChange call lightline#update()
+" }}}
+" {{{1 undotree
+nnoremap <leader>ut :UndotreeToggle<CR>
+" }}}
+" {{{1 vim-go
+let g:go_highlight_structs = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_operators = 1
+let g:go_highlight_build_constraints = 1
+"let g:go_gopls_enabled=0
+" }}}
+" {{{1 vimspector
+let g:vimspector_enable_mappings = 'HUMAN'
+" }}}
+" {{{1 Utility Functions
 function! LightlineGitStatus() abort
     return get(g:, 'coc_git_status', '')
 endfunction
@@ -328,17 +297,23 @@ endfunction
 
 function! LightlineDiagnostics() abort
     let info = get(b:, 'coc_diagnostic_info', {})
+
     if empty(info) | return '' | endif
+
     let msgs = []
+
     if get(info, 'error', 0)
-    call add(msgs, ':' . info['error'])
+        call add(msgs, ':' . info['error'])
     endif
+
     if get(info, 'warning', 0)
-    call add(msgs, ':' . info['warning'])
+        call add(msgs, ':' . info['warning'])
     endif
+
     if get(info, 'information', 0)
-    call add(msgs, ':' . info['information'])
+        call add(msgs, ':' . info['information'])
     endif
+
     return join(msgs, ' ') . ' ' . get(g:, 'coc_status', '')
 endfunction
 
@@ -351,21 +326,29 @@ function! LightlineDiagnostics2() abort
     return join(msgs, ' ') . ' ' . get(g:, 'coc_status', '')
 endfunction
 
-autocmd User CocDiagnosticChange call lightline#update()
-autocmd User CocStatusChange call lightline#update()
+function! ChromeDevTools(enabled) abort
+    if a:enabled
+        let g:coc_node_args = ['--nolazy', '--inspect=6045']
+    else
+        let g:coc_node_args = []
+    endif
 
+    execute "CocRestart"
+endfunction
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 
-"------------------------------------------------------------------------------
-" undotree
-"------------------------------------------------------------------------------
-nnoremap <leader>ut :UndotreeToggle<CR>
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
 
-
-"------------------------------------------------------------------------------
-" coc-go
-"------------------------------------------------------------------------------
-let g:go_highlight_structs = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_build_constraints = 1
+function! s:cocActionsOpenFromSelected(type) abort
+  execute 'CocCommand actions.open ' . a:type
+endfunction
+" }}}

@@ -1,7 +1,4 @@
-"------------------------------------------------------------------------------
-" General
-"------------------------------------------------------------------------------
-
+" {{{1 General
 " let's make sure we are in noncompatble mode
 set nocp
 " Sets how many lines of history VIM has to remember
@@ -33,10 +30,8 @@ set shortmess+=c
 set signcolumn=yes
 set updatetime=300
 
-"------------------------------------------------------------------------------
-" VIM user interface
-"------------------------------------------------------------------------------
-
+" }}}
+" {{{1 VIM user interface
 " Make sure that coursor is always vertically centered on j/k moves
 set so=15
 
@@ -151,14 +146,11 @@ set nrformats=octal,hex,alpha
 
 " Enable code folding by syntax.
 set foldmethod=syntax
+
 " Make by default code is unfolded.
 set foldlevelstart=99
-
-
-"------------------------------------------------------------------------------
-" Colors and Fonts
-"------------------------------------------------------------------------------
-
+" }}}
+" {{{1 Colors and Fonts
 " Enable syntax highlighting
 syntax enable
 
@@ -189,12 +181,8 @@ set ffs=unix,dos,mac
 set listchars=eol:¬,tab:→\ ,trail:•,space:·,extends:»,precedes:«,nbsp:␣
 " Show whitespace characters
 set list
-    
-
-"------------------------------------------------------------------------------
-" Files, backups and undo
-"------------------------------------------------------------------------------
-
+" }}}
+" {{{1 Files, backups and undo
 " Turn backup off, since most stuff is in SVN, git et.c anyway...
 set nobackup
 set nowb
@@ -229,14 +217,10 @@ endif
 " options - all options and mapping
 " winsize - window sizes
 " tabpages - all tab pages
-set sessionoptions=blank,buffers,curdir,folds,help,options,winsize,tabpages
-
-
-
-"------------------------------------------------------------------------------
-" Text, tab and indent related
-"------------------------------------------------------------------------------
-
+" set sessionoptions=blank,buffers,curdir,folds,help,options,winsize,tabpages
+set sessionoptions+=globals,buffers,curdir,folds,help,options,winsize,tabpages
+"}}}
+" {{{1 Text, tab and indent related
 " Use spaces instead of tabs
 set expandtab
 
@@ -259,22 +243,14 @@ set si "Smart indent
 set nowrap "Don't Wrap lines (it is stupid)
 
 inoremap <S-Tab> <C-d>
-
-
-"------------------------------------------------------------------------------
-" Visual mode related
-"------------------------------------------------------------------------------
-
+"}}}
+" {{{1 Visual mode related
 " Visual mode pressing * or # searches for the current selection
 " Super useful! From an idea by Michael Naumann
 vnoremap <silent> * :call VisualSelection('f', '')<CR>
 vnoremap <silent> # :call VisualSelection('b', '')<CR>
-
-
-"------------------------------------------------------------------------------
-" Moving around, tabs, windows and buffers
-"------------------------------------------------------------------------------
-
+"}}}
+" {{{1 Moving around, tabs, windows and buffers
 " Treat long lines as break lines (useful when moving around in them)
 map j gj
 map k gk
@@ -296,7 +272,7 @@ map <C-l> <C-W>l
 map <leader>bda :CloseHiddenBuffers<cr>
 
 " Useful mappings for managing tabs
-map <leader>tnn :tabnew<CR>
+map <leader>ta :tabnew<CR>
 map <leader>to :tabonly<CR>
 map <leader>tc :tabclose<CR>
 map <leader>tm :tabmove<CR>
@@ -331,16 +307,13 @@ autocmd BufReadPost *
      \   exe "normal! g`\"" |
      \ endif
 
+" Switch between the last two files
+nnoremap <leader><leader> <C-^>
 
-"------------------------------------------------------------------------------
-" Status line
-"------------------------------------------------------------------------------
-" Always show the status line
-set laststatus=2
-
-"------------------------------------------------------------------------------
-" Editing mappings
-"------------------------------------------------------------------------------
+" Helper function to close all hidden buffers.
+command! CloseHiddenBuffers call s:CloseHiddenBuffers()
+" }}}
+" {{{1 Editing mappings
 " Remap VIM 0 to first non-blank character
 map 0 ^
 
@@ -358,14 +331,11 @@ if has("mac") || has("macunix")
 endif
 
 " visual shifting (does not exit Visual mode)
-vnoremap < <gv <gv
-vnoremap > >gv >gv
-
-
-"------------------------------------------------------------------------------
-" Ack searching and cope displaying
+vnoremap < <gv
+vnoremap > >gv
+" }}}
+" {{{1 Ack searching and cope displaying
 " (requires ack.vim - it's much better than vimgrep/grep)
-"------------------------------------------------------------------------------
 
 " When you press gv you Ack after the selected text
 vnoremap <silent> gv :call VisualSelection('gv', '')<CR>
@@ -391,12 +361,8 @@ vnoremap <silent> <leader>r :call VisualSelection('replace', '')<CR>
 " map <leader>co ggVGy:tabnew<cr>:set syntax=qf<cr>pgg
 " map <leader>n :cn<cr>
 " map <leader>p :cp<cr>
-
-
-"------------------------------------------------------------------------------
-" Spell checking
-"------------------------------------------------------------------------------
-
+" }}}
+" {{{1 Spell checking
 " Pressing ,ss will toggle and untoggle spell checking
 map <leader>ss :setlocal spell!<cr>
 
@@ -405,12 +371,8 @@ map <leader>sn ]s
 map <leader>sp [s
 map <leader>sa zg
 map <leader>s? z=
-
-
-"------------------------------------------------------------------------------
-" Misc
-"------------------------------------------------------------------------------
-
+" }}}
+" {{{1 Misc
 " Remove the Windows ^M - when the encodings gets messed up
 noremap <Leader>m mmHmt:%s/<C-V><cr>//ge<cr>'tzt'm
 
@@ -430,9 +392,19 @@ nmap <leader>v :vsp $MYVIMRC<cr>
 " CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
 inoremap <C-c> <ESC>
 
-"------------------------------------------------------------------------------
-" Helper functions
-"------------------------------------------------------------------------------
+" Don't request terminal version string (for xterm)
+set t_RV=
+
+" map CTRL-L to piece-wise copying of the line above the current one
+imap <C-L> @@@<esc>hhkywjl?@@@<CR>P/@@@<cr>3s
+
+" Make sure that CTRL-A (used by gnu screen) is redefined
+noremap <leader>inc <C-A>
+
+" Use the system clipboard
+set clipboard+=unnamedplus
+" }}}
+" {{{1 Helper functions
 function! CmdLine(str)
     exe "menu Foo.Bar :" . a:str
     emenu Foo.Bar
@@ -460,7 +432,6 @@ function! VisualSelection(direction, extra_filter) range
     let @" = l:saved_reg
 endfunction
 
-
 " Returns true if paste mode is enabled
 function! HasPaste()
     if &paste
@@ -469,8 +440,6 @@ function! HasPaste()
     return ''
 endfunction
 
-" Helper function to close all hidden buffers.
-command! CloseHiddenBuffers call s:CloseHiddenBuffers()
 function! s:CloseHiddenBuffers()
   let open_buffers = []
 
@@ -484,4 +453,5 @@ function! s:CloseHiddenBuffers()
     endif
   endfor
 endfunction
+" }}}
 

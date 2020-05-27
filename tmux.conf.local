@@ -295,3 +295,4 @@ bind C-a send-prefix
 # move status line to top/bottom
 set -g status-position bottom
 set-option -g automatic-rename-format '#{b:pane_current_path}'
+set -g mouse on
