@@ -159,6 +159,12 @@ if has("gui_running")
     set guioptions-=T
     set guioptions-=e
     set guitablabel=%M\ %t
+else
+    set term=xterm
+    set t_Co=256
+    let &t_AB="\e[48;5;%dm"
+    let &t_AF="\e[38;5;%dm"
+    " colorscheme zenburn
 endif
 
 " Set utf8 as standard encoding and en_US as the standard language
@@ -180,7 +186,7 @@ set ffs=unix,dos,mac
 set listchars=eol:¬,tab:→\ ,trail:•,space:·,extends:»,precedes:«,nbsp:␣
 " Show whitespace characters
 " set list
-    
+
 
 "------------------------------------------------------------------------------
 " Files, backups and undo

@@ -3,7 +3,7 @@ source "$(dirname $0)/common.sh"
 
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 
-bash $ROOT_DIR/bin/install-go-nvim.sh
+bash $ROOT_DIR/bin/install-nvim.sh
 bash $ROOT_DIR/bin/install-vim.sh
 
 execute "create_dir $HOME/.config"

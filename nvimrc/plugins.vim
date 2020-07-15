@@ -16,10 +16,7 @@ Plug 'NLKNguyen/papercolor-theme'
 " }}}
 " {{{2 Editor
 Plug 'neoclide/coc.nvim', {
-    \'branch': 'release',
-    \'do': ':CocInstall coc-rust-analyzer coc-json coc-lists coc-snippets coc-git coc-go coc-yaml
-    \ coc-tsserver coc-yank coc-db coc-eslint coc-pairs coc-prettier coc-vimlsp
-    \ coc-actions coc-github'
+    \'branch': 'release'
 \}
 Plug 'honza/vim-snippets'
 Plug 'preservim/nerdcommenter'
@@ -62,6 +59,10 @@ let NERDTreeMinimalUI=1
 nmap <F8> :TagbarToggle<CR>
 " }}}
 " {{{1 coc.vim
+" Plugins
+let g:coc_global_extensions=['coc-rust-analyzer', 'coc-json', 'coc-lists', 'coc-snippets', 'coc-git',
+    \ 'coc-go', 'coc-yaml', 'coc-tsserver', 'coc-yank', 'coc-db', 'coc-eslint', 'coc-pairs', 'coc-prettier',
+    \ 'coc-vimlsp', 'coc-actions', 'coc-github', 'coc-omnisharp']
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
 " other plugin before putting this into your config.
