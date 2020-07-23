@@ -15,14 +15,13 @@
     "list.insertMappings": {
         "<C-c>": "do:exit"
     },
-    "snippets.enableStatusItem": true,
     "suggest.enablePreselect":true,
     "suggest.noselect": false,
     "diagnostic.checkCurrentLine": true,
     "rust-analyzer.lens.enable": true,
     "rust-analyzer.serverPath": "rust-analyzer",
     "snippets.snipmate.enable": false,
-    "snippets.loadFromExtensions":false,
+    "snippets.loadFromExtensions": true,
     "go.goplsOptions": {
         "usePlaceholders": true,
         "completeUnimported": true,

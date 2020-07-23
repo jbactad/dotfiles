@@ -26,3 +26,4 @@ export GOPATH=$HOME/Workspace/go
 export PATH=$PATH:$HOME/Workspace/go/bin
 export PATH=$PATH:$HOME/.cargo/bin
 export EDITOR=vim
+

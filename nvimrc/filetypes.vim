@@ -45,7 +45,6 @@ let g:tagbar_type_typescript = {
         \ 'C:constants:0:1',
         \ 'G:generators:0:1',
         \ 'I:imports:0:1',
-        \ 'M:modules:0:1',
         \ 'T:types:0:1',
         \ 'c:classes:0:1',
         \ 'f:functions:0:',
@@ -65,6 +64,21 @@ augroup javascript
     autocmd BufWrite *.{js,jsx} call DeleteTrailingWS()
     autocmd FileType javascript setlocal ts=2 sw=2 sts=2 et
 augroup END
+let g:tagbar_type_javascript = {
+    \ 'ctagstype' : 'javascript',
+    \ 'kinds': [
+        \ 'C:constants:0:1',
+        \ 'G:getters:0:1',
+        \ 'S:setters:0:1',
+        \ 'c:classes:0:1',
+        \ 'f:functions:0:',
+        \ 'g:generators:0:1',
+        \ 'm:methods:0:1',
+        \ 'p:properties:0:1',
+        \ 'v:variable:0:1',
+    \ ],
+    \ 'sort' : 0
+\ }
 " }}}
 " {{{1 JSON
 augroup json

@@ -194,11 +194,15 @@ set nowb
 set noswapfile
 
 " set undofile
-if !isdirectory("/tmp/.vim-undo-dir")
-    call mkdir("/tmp/.vim-undo-dir", "", 0700)
+let g:workspace_undodir="/tmp/.vim-go-undodir"
+" set undofile
+if !isdirectory(g:workspace_undodir)
+    call mkdir(g:workspace_undodir, "", 0700)
 endif
+
+" persist undo
 if has("persistent_undo")
-    set undodir=/tmp/.vim-undo-dir
+    execute 'set undodir =' . g:workspace_undodir
     set undofile
 endif
 
@@ -222,8 +226,7 @@ endif
 " options - all options and mapping
 " winsize - window sizes
 " tabpages - all tab pages
-" set sessionoptions=blank,buffers,curdir,folds,help,options,winsize,tabpages
-set sessionoptions+=globals,buffers,curdir,folds,help,options,winsize,tabpages
+" set sessionoptions+=globals,buffers,curdir,folds,help,options,winsize,tabpages
 "}}}
 " {{{1 Text, tab and indent related
 " Use spaces instead of tabs

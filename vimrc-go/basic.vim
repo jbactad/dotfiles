@@ -65,7 +65,7 @@ let &t_SR = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=2\x7\<Esc>\\"
 let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
 
 " Completion options (select longest + show menu even if a single match is found)
-set completeopt=longest,menuone
+set completeopt=menuone,noinsert,noselect,preview
 
 " Ignore compiled files
 set wildignore=*.o,*~,*.pyc
@@ -160,12 +160,6 @@ if has("gui_running")
     set guioptions-=T
     set guioptions-=e
     set guitablabel=%M\ %t
-else
-    set term=xterm
-    set t_Co=256
-    let &t_AB="\e[48;5;%dm"
-    let &t_AF="\e[38;5;%dm"
-    " colorscheme zenburn
 endif
 
 " Set utf8 as standard encoding and en_US as the standard language
@@ -194,15 +188,16 @@ set nobackup
 set nowb
 set noswapfile
 
+let g:workspace_undodir="/tmp/.vim-go-undodir"
 " set undofile
-if !isdirectory("/tmp/.vim-undo-dir")
-    call mkdir("/tmp/.vim-undo-dir", "", 0700)
+if !isdirectory(g:workspace_undodir)
+    call mkdir(g:workspace_undodir, "", 0700)
 endif
-" temporarily disabled due to undo is handled by vim-workspace.
-"if has("persistent_undo")
-    "set undodir=/tmp/.vim-undo-dir
-    "set undofile
-"endif
+" Persist undo
+if has("persistent_undo")
+    execute 'set undodir=' . g:workspace_undodir
+    set undofile
+endif
 
 " Remember things between sessions
 " DISABLED because of vim-procession
@@ -224,7 +219,7 @@ endif
 " options - all options and mapping
 " winsize - window sizes
 " tabpages - all tab pages
-" set sessionoptions+=globals,buffers,curdir,folds,help,options,winsize,tabpages
+" set sessionoptions+=buffers,curdir,folds,help,options,winsize,tabpages
 "}}}
 " {{{1 Text, tab and indent related
 " Use spaces instead of tabs
@@ -392,8 +387,8 @@ map <leader>x :e ~/buffer.md<cr>
 map <leader>pp :setlocal paste!<cr>
 
 " easy way to edit reload .vimrc
-nmap <leader>V :source $MYVIMRC<cr>
-nmap <leader>v :vsp $MYVIMRC<cr>
+nmap <leader>V :source $HOME/.vimrc-go<cr>
+nmap <leader>v :vsp $HOME/.vimrc-go<cr>
 
 " CTRL-C doesn't trigger the InsertLeave autocmd . map to <ESC> instead.
 inoremap <C-c> <ESC>
@@ -408,7 +403,7 @@ imap <C-L> @@@<esc>hhkywjl?@@@<CR>P/@@@<cr>3s
 noremap <leader>inc <C-A>
 
 " Use the system clipboard
-set clipboard+=unnamedplus
+set clipboard=unnamedplus
 " }}}
 " {{{1 Helper functions
 function! CmdLine(str)

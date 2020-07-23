@@ -1,4 +1,4 @@
-j
+" {{{1 Plugins
 call plug#begin()
 " {{{2 Navigation
 Plug 'preservim/nerdtree'
@@ -8,13 +8,13 @@ Plug 'majutsushi/tagbar'
 " {{{2 Appearance
 Plug 'dracula/vim'
 Plug 'joshdick/onedark.vim'
-Plug 'sheerun/vim-polyglot'
 Plug 'nightsense/cosmic_latte'
 Plug 'ryanoasis/vim-devicons'
 Plug 'itchyny/lightline.vim'
 Plug 'NLKNguyen/papercolor-theme'
 " }}}
 " {{{2 Editor
+Plug 'sheerun/vim-polyglot'
 Plug 'neoclide/coc.nvim', {
     \'branch': 'release'
 \}
@@ -25,6 +25,7 @@ Plug 'preservim/nerdcommenter'
 " {{{2 Session
 Plug 'tpope/vim-obsession'
 Plug 'dhruvasagar/vim-prosession'
+"Plug 'thaerkh/vim-workspace'
 Plug 'mbbill/undotree'
 " }}}
 " {{{2 Misc
@@ -56,7 +57,7 @@ nnoremap <leader>nf :NERDTreeFind<CR>
 let NERDTreeMinimalUI=1
 " }}}
 " {{{1 Tagbar
-nmap <F8> :TagbarToggle<CR>
+nmap <leader>tb :TagbarToggle<CR>
 " }}}
 " {{{1 coc.vim
 " Plugins
@@ -197,7 +198,6 @@ nnoremap <leader>dct :call ChromeDevTools(0)<CR>
 
 " }}}
 " {{{1 lightline
-"------------------------------------------------------------------------------
 set noshowmode
 let g:lightline = {
   \ 'colorscheme': 'onedark',
@@ -209,8 +209,8 @@ let g:lightline = {
   \     [ 'modified', ],
   \   ],
   \   'right':[
-  \     [ 'lineinfo', 'percent', 'obsession'],
-  \     [ 'filetype', 'fileencoding', 'shiftwidth', ],
+  \     [ 'lineinfo', 'percent'],
+  \     [ 'obsession', 'filetype', 'fileencoding', 'shiftwidth', ],
   \     [ 'blame', ],
   \   ],
   \ },
@@ -230,7 +230,7 @@ let g:lightline = {
   \   'shiftwidth': 'LightlineShiftwidth',
   \   'gitstatus': 'LightlineGitStatus',
   \   'diagnostics2': 'LightlineDiagnostics2',
-  \   'obsession': 'ObsessionStatus'
+  \   'obsession': 'ObsessionStatus',
   \ },
   \ 'component':{
   \ },
@@ -252,6 +252,30 @@ let g:lightline = {
 
 autocmd User CocDiagnosticChange call lightline#update()
 autocmd User CocStatusChange call lightline#update()
+" }}}
+" {{{1 vim-prosession
+let g:prosession_dir = $HOME . '/.nvim/session'
+" }}}
+" {{{1 vim-workspace
+nnoremap <leader>s :ToggleWorkspace<CR>
+" enabled = 1 (default), disabled = 0
+let g:workspace_create_new_tabs = 1
+" default session name
+let g:workspace_session_name = 'Session.nvim'
+" session storage location
+let g:workspace_session_directory = $HOME . '/.nvim/sessions/'
+" disable workspace session if opening a file, i.e. nvim file.type
+let g:workspace_session_disable_on_args = 1
+" enabled = 1 (default), disabled = 0
+let g:workspace_persist_undo_history = 1
+" undodir location. These will be deleted on restart.
+let g:workspace_undodir='/tmp/.nvim-undo-dir'
+" always autosave workspace.
+let g:workspace_autosave_always = 1
+" autoremove trailing spaces on files
+let g:workspace_autosave_untrailspaces = 0
+" ignore gitcommit file from workspace
+let g:workspace_autosave_ignore = ['gitcommit']
 " }}}
 " {{{1 undotree
 nnoremap <leader>ut :UndotreeToggle<CR>

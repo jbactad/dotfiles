@@ -1,7 +1,8 @@
+"{{{1 Plugins
+"}}}
 call plug#begin('$HOME/.vim/plugged')
 
-Plug 'preservim/nerdcommenter'
-Plug 'scrooloose/nerdtree'
+Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'kien/ctrlp.vim'
 "Plug 'valloric/youcompleteme'
@@ -14,9 +15,7 @@ Plug 'NLKNguyen/papercolor-theme'
 
 call plug#end()
 
-"------------------------------------------------------------------------------
-" Colorscheme
-"------------------------------------------------------------------------------
+"{{{1 Colorscheme
 set background=dark
 let g:PaperColor_Theme_Options = {
   \   'theme': {
@@ -30,12 +29,12 @@ try
 catch
 endtry
 highlight Normal guifg=grey guibg=#282A36
+"}}}
 
 
-"------------------------------------------------------------------------------
-" NerdTree
-"------------------------------------------------------------------------------
+"{{{1 NerdTree
 let NERDTreeShowHidden=1
 map <C-n> :NERDTreeToggle<CR>
 nnoremap <leader>nr :NERDTreeRefreshRoot<CR>
 nnoremap <leader>nf :NERDTreeFind<CR>
+"}}}
