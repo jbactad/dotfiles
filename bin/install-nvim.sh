@@ -4,8 +4,8 @@ INSTALL_PATH="${ROOT_DIR}/nvimrc"
 
 printf "${Cyan}Setting up nvim${Color_off}\n"
 mkdir -p "$HOME/.config/nvim/plugged"
-ln -s "$INSTALL_PATH/coc/coc-settings.json" "$HOME/.config/nvim/coc-settings.json"
-ln -s "$INSTALL_PATH/coc/ultisnips" "$HOME/.config/coc/ultisnips"
+ln -s -f "$INSTALL_PATH/coc/coc-settings.json" "$HOME/.config/nvim/coc-settings.json"
+ln -s -f "$INSTALL_PATH/coc/ultisnips" "$HOME/.config/coc/ultisnips"
 
 NVIM_PLUG_PATH="$HOME/.local/share/nvim/site/autoload/plug.vim"
 NVIM_PATH="$HOME/.config/nvim/init.vim"

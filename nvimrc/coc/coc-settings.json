@@ -1,40 +1,40 @@
 {
-    "coc.preferences.colorSupport": true,
-    "eslint.autoFixOnSave": true,
-    "coc.preferences.formatOnSaveFiletypes": [
-        "rust",
-        "go",
-        "javascript",
-        "javascript.jsx",
-        "typescript",
-        "typescript.tsx"
-    ],
-    "list.normalMappings": {
-        "<C-c>": "do:exit"
-    },
-    "list.insertMappings": {
-        "<C-c>": "do:exit"
-    },
-    "suggest.enablePreselect":true,
-    "suggest.noselect": false,
-    "diagnostic.checkCurrentLine": true,
-    "rust-analyzer.lens.enable": true,
-    "rust-analyzer.serverPath": "rust-analyzer",
-    "snippets.snipmate.enable": false,
-    "snippets.loadFromExtensions": true,
-    "go.goplsOptions": {
-        "usePlaceholders": true,
-        "completeUnimported": true,
-        "staticcheck": true
-    },
-    "go.goplsArgs": [
-      //"-rpc.trace",
-      //"serve",
-      //"--debug=localhost:6060"
-    ],
-    "git.addGBlameToBufferVar": true,
-    "languageserver": {
-
-    },
-    "coc-actions.useCursorLine": true
+  "coc.preferences.colorSupport": true,
+  "eslint.autoFixOnSave": true,
+  "coc.preferences.formatOnSaveFiletypes": [
+    "rust",
+    "go",
+    "javascript",
+    "javascript.jsx",
+    "typescript",
+    "typescript.tsx",
+    "json"
+  ],
+  "list.normalMappings": {
+    "<C-c>": "do:exit"
+  },
+  "list.insertMappings": {
+    "<C-c>": "do:exit"
+  },
+  "snippets.enableStatusItem": true,
+  "suggest.enablePreselect": true,
+  "suggest.noselect": false,
+  "diagnostic.checkCurrentLine": true,
+  "rust-analyzer.lens.enable": true,
+  "rust-analyzer.serverPath": "rust-analyzer",
+  "snippets.snipmate.enable": false,
+  "snippets.loadFromExtensions": false,
+  "go.goplsOptions": {
+    "usePlaceholders": true,
+    "completeUnimported": true,
+    "staticcheck": true
+  },
+  "go.goplsArgs": [
+    //"-rpc.trace",
+    //"serve",
+    //"--debug=localhost:6060"
+  ],
+  "git.addGBlameToBufferVar": true,
+  "languageserver": {},
+  "coc-actions.useCursorLine": true
 }
