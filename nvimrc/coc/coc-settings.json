@@ -1,14 +1,15 @@
 {
   "coc.preferences.colorSupport": true,
-  "eslint.autoFixOnSave": true,
+  "eslint.autoFixOnSave": false,
   "coc.preferences.formatOnSaveFiletypes": [
     "rust",
     "go",
     "javascript",
     "javascript.jsx",
-    "typescript",
-    "typescript.tsx",
-    "json"
+    // "typescript",
+    // "typescript.tsx",
+    // "json",
+    "xml"
   ],
   "list.normalMappings": {
     "<C-c>": "do:exit"
@@ -23,7 +24,7 @@
   "rust-analyzer.lens.enable": true,
   "rust-analyzer.serverPath": "rust-analyzer",
   "snippets.snipmate.enable": false,
-  "snippets.loadFromExtensions": false,
+  "snippets.loadFromExtensions": true,
   "go.goplsOptions": {
     "usePlaceholders": true,
     "completeUnimported": true,

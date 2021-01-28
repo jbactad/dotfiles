@@ -172,7 +172,7 @@ set encoding=utf8
 set spelllang=en_US
 
 " Use Unix as the standard file type
-set ffs=unix,dos,mac
+set ffs=unix,mac
 
 " highlight trailing space
 "highlight ExtraWhitespace ctermbg=red guibg=red

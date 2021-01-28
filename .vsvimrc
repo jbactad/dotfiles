@@ -1,0 +1,22 @@
+set clipboard=unnamed
+let mapleader = ","
+
+nnoremap gi :vsc Edit.GoToImplementation<CR>
+nnoremap <S-k> :vsc Edit.QuickInfo<CR>
+nnoremap gr :vsc Edit.FindAllReferences<CR>
+
+nnoremap <M-j> :vsc Edit.MoveSelectedLinesDown<CR>
+nnoremap <M-k> :vsc Edit.MoveSelectedLinesUp<CR>
+vnoremap <M-j> :vsc Edit.MoveSelectedLinesDown<CR>
+vnoremap <M-k> :vsc Edit.MoveSelectedLinesUp<CR>
+
+nnoremap <leader>f :vsc Edit.GoToFile<CR>
+nnoremap <leader>r :vsc Edit.GoToRecentFile<CR>
+nnoremap <leader>m :vsc Edit.GoToMember<CR>
+nnoremap <leader>s :vsc Edit.GoToSymbol<CR>
+nnoremap <leader>ne :vsc View.NextError<CR>
+nnoremap <leader>pe :vsc Edit.PreviousError<CR>
+nnoremap <leader>tr :vsc RunTestsInCurrentContext<CR>
+
+nnoremap <C-O> :vsc View.NavigateBackward<CR>
+nnoremap <C-I> :vsc View.NavigateForward<CR>
