@@ -403,7 +403,7 @@ imap <C-L> @@@<esc>hhkywjl?@@@<CR>P/@@@<cr>3s
 noremap <leader>inc <C-A>
 
 " Use the system clipboard
-set clipboard=unnamedplus
+set clipboard+=unnamedplus
 " }}}
 " {{{1 Helper functions
 function! CmdLine(str)

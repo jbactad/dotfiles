@@ -16,9 +16,10 @@ symlink "${ROOT_DIR}/gitignore"
 
 git config --global dore.excludesfile $HOME/.gitignore
 
+symlink "${ROOT_DIR}/ideavimrc"
+symlink "${ROOT_DIR}/vsvimrc"
 
 if [[ $(awk -F= '/^NAME/{print $2}' /etc/os-release) == "Ubuntu" ]]; then
     echo "Linux Distro is Ubuntu"
     bash $ROOT_DIR/bin/ubuntu-post-install.sh
 fi
-
