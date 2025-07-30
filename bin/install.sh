@@ -12,6 +12,7 @@ execute "create_dir $HOME/.local/bin"
 symlink "${ROOT_DIR}/tmux.conf"
 symlink "${ROOT_DIR}/tmux.conf.local"
 symlink "${ROOT_DIR}/profile"
+symlink "${ROOT_DIR}/zprofile"
 symlink "${ROOT_DIR}/gitignore"
 
 git config --global dore.excludesfile $HOME/.gitignore
