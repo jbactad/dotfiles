@@ -3,3 +3,11 @@
 .DS_Store
 .history
 .undodir
+.zprofile.local
+.php-cs-fixer.dist.php
+tmp/
+.mcp.json
+GEMINI.md
+conductor/
+.automaker
+.worktrees

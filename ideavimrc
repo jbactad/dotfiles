@@ -15,3 +15,4 @@ nnoremap gr :action FindUsages<CR>
 
 nmap <C-o> :action Back<CR>
 nmap <C-i> :action Forward<CR>
+nmap ma :action ToggleBookmark<CR>

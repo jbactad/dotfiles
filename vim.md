@@ -1,2 +1,0 @@
-# Neovim/Vim Documentation
-

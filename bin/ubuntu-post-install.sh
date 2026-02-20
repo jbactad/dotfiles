@@ -21,7 +21,6 @@ sudo apt-get update \
     gparted \
     neofetch \
     htop \
-    docker.io \
     neovim \
     papirus-icon-theme \
     numix-icon-theme-circle \
@@ -29,26 +28,6 @@ sudo apt-get update \
 
 # oh-my-zsh
 sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-
-# Docker and utils
-sudo systemctl enable --now docker
-sudo usermod -aG docker $USER
-pip3 install docker-compose --user
-
-## Kubectl
-sudo snap install --classic kubectl
-
-## Helm
-curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
-chmod 700 get_helm.sh
-./get_helm.sh && rm get_helm.sh
-
-## minikube
-curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64 \
-  && chmod +x minikube
-
-sudo mkdir -p /usr/local/bin/
-sudo install minikube /usr/local/bin/ && rm minikube
 
 # Editor
 ## vs-code
