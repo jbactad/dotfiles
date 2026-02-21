@@ -16,6 +16,7 @@ symlink "${ROOT_DIR}/zprofile"
 symlink "${ROOT_DIR}/gitignore"
 
 git config --global core.excludesfile $HOME/.gitignore
+git config --global user.name "jbactad"
 
 symlink "${ROOT_DIR}/ideavimrc"
 symlink "${ROOT_DIR}/vsvimrc"
