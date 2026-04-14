@@ -1,5 +1,6 @@
 .vscode
 .idea
+.zed
 .DS_Store
 .history
 .undodir
@@ -11,3 +12,5 @@ GEMINI.md
 conductor/
 .automaker
 .worktrees
+.phpactor.json
+.mission-control

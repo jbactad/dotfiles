@@ -298,6 +298,9 @@ set-option -g automatic-rename-format '#{b:pane_current_path}'
 # start with mouse mode enabled.
 set -g mouse on
 
+# claude-tmux: session manager popup (prefix + C-c)
+bind-key C-c display-popup -E -w 80% -h 80% "~/.cargo/bin/claude-tmux"
+
 set -g @continuum-save-interval '15'
 set -g @continuum-boot 'on'
 # automatically restore session. <prefix> <C-r> to restore manually.

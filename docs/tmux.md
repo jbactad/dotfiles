@@ -87,51 +87,72 @@ Copy-to-OS-clipboard is enabled. Requires `reattach-to-user-namespace` on macOS,
 
 `<prefix>` is <kbd>Ctrl</kbd> + <kbd>a</kbd>.
 
+Bindings marked "tmux default" are standard tmux behavior, not custom mappings. Bindings without a note are defined in `tmux.conf` or `tmux.conf.local`.
+
 ### Sessions
 
 | Binding | Action |
 |---------|--------|
-| `<prefix> C-c` | Create a new session |
+| `<prefix> C-c` | Open claude-tmux session manager popup |
 | `<prefix> C-f` | Switch to another session by name |
+| `<prefix> $` | Rename current session |
+| `<prefix> d` | Detach from session |
+| `<prefix> s` | List and switch sessions |
 
 ### Windows
 
 | Binding | Action |
 |---------|--------|
+| `<prefix> c` | Create new window |
 | `<prefix> C-h` | Previous window |
 | `<prefix> C-l` | Next window |
 | `<prefix> Tab` | Last active window |
+| `<prefix> w` | List windows |
+| `<prefix> ,` | Rename current window |
+| `<prefix> &` | Kill current window |
+| `<prefix> 0-9` | Switch to window by index |
 
 ### Panes
 
 | Binding | Action |
 |---------|--------|
-| `<prefix> -` | Split vertically |
-| `<prefix> _` | Split horizontally |
+| `<prefix> -` | Split vertically (new pane below) |
+| `<prefix> _` | Split horizontally (new pane right) |
 | `<prefix> h/j/k/l` | Navigate panes (vim-style) |
-| `<prefix> H/J/K/L` | Resize panes |
-| `<prefix> <` / `<prefix> >` | Swap panes |
+| `<prefix> H/J/K/L` | Resize panes (repeatable) |
+| `<prefix> <` / `<prefix> >` | Swap pane with prev/next |
 | `<prefix> +` | Maximize pane to new window (toggle) |
+| `<prefix> z` | Zoom/unzoom pane (tmux built-in toggle) |
+| `<prefix> x` | Kill current pane |
+| `<prefix> q` | Show pane numbers (press number to jump) |
+| `<prefix> {` / `<prefix> }` | Move pane left/right |
 
 ### Copy Mode
 
 | Binding | Action |
 |---------|--------|
-| `<prefix> Enter` | Enter copy mode |
+| `<prefix> [` | Enter copy mode |
 | `<prefix> b` | List paste buffers |
 | `<prefix> p` | Paste from top buffer |
 | `<prefix> P` | Choose paste buffer |
+| `<prefix> y` | Copy last buffer to OS clipboard |
 
-Copy-mode-vi bindings:
+Copy-mode-vi bindings (active inside `<prefix> [`):
 
 | Binding | Action |
 |---------|--------|
 | `v` | Begin selection |
-| `C-v` | Toggle blockwise visual mode |
+| `C-v` | Toggle blockwise (rectangle) selection |
 | `H` | Start of line |
 | `L` | End of line |
-| `y` | Copy selection |
-| `Escape` | Cancel |
+| `y` | Copy selection and exit copy mode |
+| `Escape` | Cancel / exit copy mode |
+| `q` | Exit copy mode |
+| `?` | Search backward |
+| `/` | Search forward |
+| `n` / `N` | Next / previous search match |
+| `g` | Go to top |
+| `G` | Go to bottom |
 
 ### General
 
@@ -141,6 +162,9 @@ Copy-mode-vi bindings:
 | `<prefix> r` | Reload configuration |
 | `C-l` | Clear screen and tmux history |
 | `<prefix> m` | Toggle mouse mode |
+| `<prefix> t` | Show clock |
+| `<prefix> ?` | List all key bindings |
+| `<prefix> :` | Open tmux command prompt |
 | `<prefix> U` | Launch Urlview (if available) |
 | `<prefix> F` | Launch Facebook PathPicker (if available) |
 
